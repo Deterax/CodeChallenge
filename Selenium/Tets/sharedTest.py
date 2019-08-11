@@ -5,7 +5,7 @@ from Pages.MortageCalculator import MortgageCalculator
 import unittest
 from selenium import webdriver as wd
 from selenium.webdriver.support.color import Color
-import requests
+from Tets.LinkTest import TestLinks
 
 
 class SharedTest(unittest.TestCase):
@@ -42,13 +42,7 @@ class SharedTest(unittest.TestCase):
             assert self.home.find_by_xpath(self.home.fail_pig).is_displayed()
 
     def test_check_Links(self):
-        links = self.home.driver.find_elements_by_xpath("//*[@href]")
-        for link in links:
-            urlCheck = requests.head(link.get_attribute("href")).status_code
-            if urlCheck == 999:
-                    pass
-            else:
-                    self.assertLess(urlCheck, 400, "the url %s  is not valid error code %i" % (link.get_attribute("href"), urlCheck))
+        TestLinks.check_Links(self.home.driver)
 
 
     def tearDown(self):

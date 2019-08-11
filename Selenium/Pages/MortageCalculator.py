@@ -3,38 +3,41 @@ import re
 
 
 class MortgageCalculator(Page):
+    calculator_button = "//section[@id='introduction']//a[@href='https://www.consumeraffairs.com/finance/how-much-house-can-i-afford.html#calculator']"
+    annual_income_input = "/html//section[@id='calculator']/div/div//input[@name='household_income']"
+    interest_input = "/html//section[@id='calculator']/div/div//input[@name='interest_rate']"
+    downpay_input = "/html//section[@id='calculator']/div/div//input[@name='down_payment']"
+    time_input = "/html//section[@id='calculator']/div/div//input[@name='mortgage_term']"
+    state_slector = "/html//section[@id='calculator']/div/div//select[@name='state_value']"
+    annual_income_slide = "/html//section[@id='calculator']/div/div/div[3]/div[1]/div[@class='slider_inside']/div[@class='slider slider-horizontal']/div[5]"
+    full_annual_income_slide = "/html//section[@id='calculator']/div/div/div[3]/div[1]/div[@class='slider_inside']/div[@class='slider slider-horizontal']"
+    interest_slide = "/html//section[@id='calculator']/div/div/div[3]/div[2]/div[@class='slider_inside']/div[@class='slider slider-horizontal']/div[5]"
+    downpay_slide = "/html//section[@id='calculator']/div/div/div[3]/div[3]/div[@class='slider_inside']/div[@class='slider slider-horizontal']/div[5]"
+    time_slide = "/html//section[@id='calculator']/div/div/div[3]/div[4]/div[@class='slider_inside']/div[@class='slider slider-horizontal']/div[5]"
+    monthpay_slide = "/html//section[@id='calculator']/div//div[@class='m_s_g']/div[@class='slider_inside']/div[@class='slider slider-horizontal']/div[5]"
+    slider_left_selection_green = "/html//section[@id='calculator']/div//div[@class='m_s_g']/div[@class='slider_inside']/div[@class='slider slider-horizontal']//div[@class='slider-rangeHighlight slider-selection']"
+    slider_left_selection_orange = "/html//section[@id='calculator']/div//div[@class='m_s_g']/div[@class='slider_inside']/div[@class='slider slider-horizontal']//div[@class='slider-rangeHighlight slider-selection']"
+    slider_right_selection = "/html//section[@id='calculator']/div//div[@class='m_s_g']/div[@class='slider_inside']/div[@class='slider slider-horizontal']//div[@class='slider-rangeHighlight slider-selection']"
+    monthpay_slide_css = ".m_s_g .slider-horizontal [role='slider']:nth-of-type(5)"
+    fail_pig = "/html//section[@id='calculator']/div/div/div[4]/div[@class='fail']"
+    success_pig = "/html//section[@id='calculator']/div/div/div[4]/div[@class='success']"
+    alt_message = "/html//section[@id='calculator']/div//div[@class='fail_visibility']/span"
+    max_amount = "/html//section[@id='calculator']/div/div//span[@class='count_val_afford']"
+    full_slider_track = "/html//section[@id='calculator']/div//div[@class='m_s_g']/div[@class='slider_inside']/div[@class='slider slider-horizontal']"
+    interest_slide = "/html//section[@id='calculator']/div/div/div[3]/div[2]/div[@class='slider_inside']/div[@class='slider slider-horizontal']/div[5]"
+    interest_slide_track = "/html//section[@id='calculator']/div/div/div[3]/div[2]/div[@class='slider_inside']/div[@class='slider slider-horizontal']"
+    down_pay_slide = "/html//section[@id='calculator']/div/div/div[3]/div[3]/div[@class='slider_inside']/div[@class='slider slider-horizontal']/div[5]"
+    down_pay_slide_track = "/html//section[@id='calculator']/div/div/div[3]/div[3]/div[@class='slider_inside']/div[@class='slider slider-horizontal']"
+    time_slide = "/html//section[@id='calculator']/div/div/div[3]/div[4]/div[@class='slider_inside']/div[@class='slider slider-horizontal']/div[5]"
+    time_slide_track = "/html//section[@id='calculator']/div/div/div[3]/div[4]/div[@class='slider_inside']/div[@class='slider slider-horizontal']"
+    title = "Mortgage Calculator | ConsumerAffairs"
+
     def __init__(self, selen_dirver, added_url):
         super().__init__(selen_dirver, added_url)
         # Assert Title of the Login Page and Login
         self.driver.get(self.main_url)
-        assert "Mortgage Calculator | ConsumerAffairs" == self.driver.title
-        self.calculator_button = "//section[@id='introduction']//a[@href='https://www.consumeraffairs.com/finance/how-much-house-can-i-afford.html#calculator']"
-        self.annual_income_input = "/html//section[@id='calculator']/div/div//input[@name='household_income']"
-        self.interest_input = "/html//section[@id='calculator']/div/div//input[@name='interest_rate']"
-        self.downpay_input = "/html//section[@id='calculator']/div/div//input[@name='down_payment']"
-        self.time_input = "/html//section[@id='calculator']/div/div//input[@name='mortgage_term']"
-        self.state_slector = "/html//section[@id='calculator']/div/div//select[@name='state_value']"
-        self.annual_income_slide = "/html//section[@id='calculator']/div/div/div[3]/div[1]/div[@class='slider_inside']/div[@class='slider slider-horizontal']/div[5]"
-        self.full_annual_income_slide = "/html//section[@id='calculator']/div/div/div[3]/div[1]/div[@class='slider_inside']/div[@class='slider slider-horizontal']"
-        self.interest_slide = "/html//section[@id='calculator']/div/div/div[3]/div[2]/div[@class='slider_inside']/div[@class='slider slider-horizontal']/div[5]"
-        self.downpay_slide = "/html//section[@id='calculator']/div/div/div[3]/div[3]/div[@class='slider_inside']/div[@class='slider slider-horizontal']/div[5]"
-        self.time_slide = "/html//section[@id='calculator']/div/div/div[3]/div[4]/div[@class='slider_inside']/div[@class='slider slider-horizontal']/div[5]"
-        self.monthpay_slide = "/html//section[@id='calculator']/div//div[@class='m_s_g']/div[@class='slider_inside']/div[@class='slider slider-horizontal']/div[5]"
-        self.slider_left_selection_green = "/html//section[@id='calculator']/div//div[@class='m_s_g']/div[@class='slider_inside']/div[@class='slider slider-horizontal']//div[@class='slider-rangeHighlight slider-selection']"
-        self.slider_left_selection_orange = "/html//section[@id='calculator']/div//div[@class='m_s_g']/div[@class='slider_inside']/div[@class='slider slider-horizontal']//div[@class='slider-rangeHighlight slider-selection']"
-        self.slider_right_selection = "/html//section[@id='calculator']/div//div[@class='m_s_g']/div[@class='slider_inside']/div[@class='slider slider-horizontal']//div[@class='slider-rangeHighlight slider-selection']"
-        self.monthpay_slide_css = ".m_s_g .slider-horizontal [role='slider']:nth-of-type(5)"
-        self.fail_pig = "/html//section[@id='calculator']/div/div/div[4]/div[@class='fail']"
-        self.success_pig = "/html//section[@id='calculator']/div/div/div[4]/div[@class='success']"
-        self.alt_message = "/html//section[@id='calculator']/div//div[@class='fail_visibility']/span"
-        self.max_amount = "/html//section[@id='calculator']/div/div//span[@class='count_val_afford']"
-        self.full_slider_track = "/html//section[@id='calculator']/div//div[@class='m_s_g']/div[@class='slider_inside']/div[@class='slider slider-horizontal']"
-        self.interest_slide = "/html//section[@id='calculator']/div/div/div[3]/div[2]/div[@class='slider_inside']/div[@class='slider slider-horizontal']/div[5]"
-        self.interest_slide_track = "/html//section[@id='calculator']/div/div/div[3]/div[2]/div[@class='slider_inside']/div[@class='slider slider-horizontal']"
-        self.down_pay_slide = "/html//section[@id='calculator']/div/div/div[3]/div[3]/div[@class='slider_inside']/div[@class='slider slider-horizontal']/div[5]"
-        self.down_pay_slide_track = "/html//section[@id='calculator']/div/div/div[3]/div[3]/div[@class='slider_inside']/div[@class='slider slider-horizontal']"
-        self.time_slide = "/html//section[@id='calculator']/div/div/div[3]/div[4]/div[@class='slider_inside']/div[@class='slider slider-horizontal']/div[5]"
-        self.time_slide_track = "/html//section[@id='calculator']/div/div/div[3]/div[4]/div[@class='slider_inside']/div[@class='slider slider-horizontal']"
+        assert self.title == self.driver.title
+
 
 
 

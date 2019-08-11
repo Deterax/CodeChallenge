@@ -9,7 +9,6 @@ from Tets.sharedTest import SharedTest
 from selenium.webdriver.common.keys import Keys
 
 
-
 class CalculatorsTest(unittest.TestCase):
 
     def setUp(self):

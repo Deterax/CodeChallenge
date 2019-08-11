@@ -13,6 +13,9 @@ class Page(object):
         self.main_url = main_url+added_url
         self.driver = selen_dirver
 
+    def change_url(self, url):
+        self.main_url = self.main_url + url
+
     def get_current_driver(self):
         return self.driver
 
