@@ -1,13 +1,12 @@
 import unittest
 from selenium import webdriver as wd
-import requests
 from Pages.aPage import Page
 from Pages.HomePage import HomePage
 from Pages.BuyersGuides import BuyersGuide
 from Pages.MortagesPage import MortgagesPage
 from Pages.MortageCalculator import MortgageCalculator
 from selenium.webdriver.common.keys import Keys
-from Tets.LinkTest import TestLinks
+from utilSetup.LinkTest import TestLinks
 
 
 class Navigate_to_mortage(unittest.TestCase):

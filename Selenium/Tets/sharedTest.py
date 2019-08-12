@@ -1,20 +1,18 @@
 """
 shared test action
 """
-from Pages.MortageCalculator import MortgageCalculator
 import unittest
-from selenium import webdriver as wd
 from selenium.webdriver.support.color import Color
-from Tets.LinkTest import TestLinks
+from utilSetup.LinkTest import TestLinks
 
 
-class SharedTest(unittest.TestCase):
+class SharedTest():
 
-    def setUp(self):
-        driver = wd.Chrome(executable_path="../Drivers/chromedriver.exe")
-        self.home = MortgageCalculator(driver, "finance/how-much-house-can-i-afford.html#")
-        self.home.open_page("Max")
-        self.home.set_mid_values()
+    #def setUp(self):
+    #   driver = wd.Chrome(executable_path="../Drivers/chromedriver.exe")
+    #    self.home = MortgageCalculator(driver, "finance/how-much-house-can-i-afford.html#")
+    #    self.home.open_page("Max")
+    #    self.home.set_mid_values()
 
     def test_consistency(self):
         # testing other fields and consistency
@@ -45,8 +43,8 @@ class SharedTest(unittest.TestCase):
         TestLinks.check_Links(self.home.driver)
 
 
-    def tearDown(self):
-        self.home.driver.close()
+    #def tearDown(self):
+     #   self.home.driver.close()
 
 
 if __name__ == '__main__':

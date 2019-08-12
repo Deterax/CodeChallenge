@@ -1,5 +1,6 @@
 from Pages.aPage import Page
 import re
+from selenium.webdriver.common.keys import Keys
 
 
 class MortgageCalculator(Page):
@@ -48,6 +49,7 @@ class MortgageCalculator(Page):
         self.driver.find_element_by_xpath(self.interest_input).send_keys("5")
         self.driver.find_element_by_xpath(self.downpay_input).send_keys("135000")
         self.driver.find_element_by_xpath(self.time_input).send_keys("20")
+        self.driver.find_element_by_xpath(self.time_input).send_keys(Keys.RETURN)
         self.driver.find_element_by_xpath(self.monthpay_slide).click()
 
     def move_slide(self, which_to, amount):

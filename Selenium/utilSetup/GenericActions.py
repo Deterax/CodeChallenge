@@ -3,8 +3,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 import urllib.request
 from selenium.webdriver.common.by import By
+from Pages.aPage import Page
 
-class GenericActions(object):
+class GenericActions(object, Page):
 
     def __init__(self, selen_dirver, main_url):
         self.driver = selen_dirver

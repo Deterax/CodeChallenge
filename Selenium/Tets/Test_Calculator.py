@@ -26,7 +26,7 @@ class CalculatorsTest(unittest.TestCase):
 
     def test_annual_field_valid(self):
         #test for invalid value
-        random_number = random.randint(0, 500000)
+        random_number = random.randint(0, 499999)
         self.home.find_by_xpath(self.home.annual_income_input).send_keys(random_number)
         self.home.set_input_value(self.home.time_input, "20")
         assert int(self.home.find_by_xpath(self.home.annual_income_input).get_property("value").replace(',', '')) == random_number
@@ -75,10 +75,7 @@ class CalculatorsTest(unittest.TestCase):
         random_number = random.randint(15, 40)
         self.home.find_by_xpath(self.home.time_input).send_keys(random_number)
         self.home.find_by_xpath(self.home.time_input).send_keys(Keys.RETURN)
-        self.home.set_input_value(self.home.annual_income_input, "240000")
-        print(random_number)
-        print(self.home.find_by_xpath(self.home.time_input).get_property("value"))
-        assert self.home.find_by_xpath(self.home.time_input).get_property("value") == random_number
+        assert self.home.find_by_xpath(self.home.time_input).get_property("value") == str(random_number)
         SharedTest.test_consistency(self)
 
     def test_Monthly_Payment_affordable(self):
