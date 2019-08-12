@@ -47,9 +47,6 @@ class SharedTest():
      #   self.home.driver.close()
 
 
-if __name__ == '__main__':
-    unittest.main()
-
 
 
 

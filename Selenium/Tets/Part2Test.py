@@ -1,3 +1,6 @@
+"""
+test for navigation to the Mortage section
+"""
 import unittest
 from selenium import webdriver as wd
 from Pages.aPage import Page
@@ -7,8 +10,9 @@ from Pages.MortagesPage import MortgagesPage
 from Pages.MortageCalculator import MortgageCalculator
 from selenium.webdriver.common.keys import Keys
 from utilSetup.LinkTest import TestLinks
+import HtmlTestRunner
 
-
+#Test Case described on Section 2, related to excell file sheet: TestScenarioMortage
 class Navigate_to_mortage(unittest.TestCase):
 
     def setUp(self):
@@ -74,9 +78,19 @@ class Navigate_to_mortage(unittest.TestCase):
     def tearDown(self):
         self.the_page.driver.close()
 
+#this is the class to run.
+class MyTestSuite(unittest.TestCase):
 
-if __name__ == '__main__':
-    unittest.main()
+    def test_suit_excecuter(self):
+        smoke_test = unittest.TestSuite()
+        smoke_test.addTests([
+            unittest.defaultTestLoader.loadTestsFromTestCase(Navigate_to_mortage),
+        ])
+        runner1 = HtmlTestRunner.HTMLTestRunner(output="../Reports")
+        runner1.run(smoke_test)
+
+
+
 
 
 

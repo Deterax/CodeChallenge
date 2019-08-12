@@ -1,5 +1,5 @@
 """
-data test on calculator
+test on calculator
 """
 from Pages.MortageCalculator import MortgageCalculator
 import unittest
@@ -7,8 +7,9 @@ from selenium import webdriver as wd
 import random
 from Tets.sharedTest import SharedTest
 from selenium.webdriver.common.keys import Keys
+import HtmlTestRunner
 
-
+#Test Case described on Section 1, related to excell file sheet: TestScenarioCalculator
 class CalculatorsTest(unittest.TestCase):
 
     def setUp(self):
@@ -220,10 +221,18 @@ class CalculatorsTest(unittest.TestCase):
     def tearDown(self):
         self.home.driver.close()
 
+#this is the class to run.
+class MyTestSuite(unittest.TestCase):
+
+    def test_suit_excecuter(self):
+        smoke_test = unittest.TestSuite()
+        smoke_test.addTests([
+            unittest.defaultTestLoader.loadTestsFromTestCase(CalculatorsTest),
+        ])
+        runner1 = HtmlTestRunner.HTMLTestRunner(output="../Reports")
+        runner1.run(smoke_test)
 
 
-if __name__ == '__main__':
-    unittest.main()
 
 
 
